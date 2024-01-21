@@ -7,7 +7,7 @@ import java.util.Map;
 public class IndexCreation {
     Map<Integer, List<Integer>> hashIndex = new HashMap<>();
 
-    public void createIndex(String filePath, int indexed_attribute_position) {
+    public void createHashIndex(String filePath, int indexed_attribute_position) {
         try {
             RandomAccessFile randomAccessFile = new RandomAccessFile(filePath, "r");
             int header_offset = 2;

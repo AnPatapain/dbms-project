@@ -13,7 +13,7 @@ public class ExempleIndexCreation {
         }
 
         IndexCreation indexCreation = new IndexCreation();
-        indexCreation.createIndex("C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\table1", 1);
+        indexCreation.createHashIndex("C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\table1", 1);
 
         System.out.println("HashIndex");
         indexCreation.getHashIndex().forEach((key, value) -> System.out.println(key + "-> " + value));
