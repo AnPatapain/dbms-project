@@ -8,11 +8,11 @@ public class IndexScan implements Operateur{
     IndexCreation indexCreation;
     int attribute; // The attribute that will be indexed
     int cle; // The value of index attribute that we want to scan
-    List<Integer> tupleAddresses;
+
     RandomAccessFile randomAccessFile;
-    int tableSize;
-    int tupleSize;
-    int e; // e is the current pointer on tupleAddresses list (Util for le mode pipeline)
+    List<Block> blockList;
+    int currentBlock;
+    int listBlockSize;
 
     public IndexScan(String filePath, int attribute, int cle, IndexCreation indexCreation) {
         this.filePath = filePath;
@@ -24,46 +24,33 @@ public class IndexScan implements Operateur{
     @Override
     public void open() {
 
-//        this.indexCreation.createHashIndex(this.filePath, this.attribute);
-////        tupleAddresses = new ArrayList<>(this.indexCreation.getHashIndex().get(cle));
-//        System.out.println(tupleAddresses);
-
-        e = 0;
-        try {
-            randomAccessFile = new RandomAccessFile(filePath, "r");
-            this.tableSize = randomAccessFile.read();
-            this.tupleSize = randomAccessFile.read();
-        }catch(IOException exception) {
-            throw new RuntimeException(exception);
-        }
-
+        this.indexCreation.createHashIndex(this.filePath, this.attribute);
+//        this.indexCreation.displayIndex();
+        this.blockList = this.indexCreation.getHashIndexList(cle);
+//        System.out.println(blockList);
+        this.currentBlock = 0;
     }
 
     @Override
     public Tuple next() {
-        if(e >= tupleAddresses.size()){
-            return null;
-        }
-        int tupleAddress = tupleAddresses.get(e);
-        Tuple tuple = new Tuple(this.tupleSize);
-        try {
-            randomAccessFile.seek(tupleAddress);
-            for(int col = 0; col < this.tupleSize; col++) {
-                tuple.val[col] = randomAccessFile.read();
+        this.listBlockSize =this.blockList.size()-1;
+        while(this.currentBlock<this.listBlockSize){
+            Block block = this.blockList.get(this.currentBlock);
+            List<Tuple> listTuples = block.getRecord();
+            while(listTuples.size()>0){
+                Tuple t1 = listTuples.remove(0);
+                if(t1.val[attribute] == cle) {
+//                    System.out.println("Block Read"+(currentBlock);
+                    return t1;
+                }
             }
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            this.currentBlock++;
         }
-        e++;
-        return tuple;
+        return null;
     }
 
     @Override
     public void close() {
-        try {
-            randomAccessFile.close();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+
     }
 }

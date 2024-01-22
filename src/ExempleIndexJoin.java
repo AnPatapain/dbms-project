@@ -1,12 +1,11 @@
 public class ExempleIndexJoin {
     public static void main(String[] args){
-        String filepath1 = "E:\\4A\\Mechanism_SGBD\\dbms-project\\src\\table1";
-        String filepath2 = "E:\\4A\\Mechanism_SGBD\\dbms-project\\src\\table2";
-        IndexJoin indexJoin = new IndexJoin(filepath1,filepath2,1,1);
+
+        IndexJoin indexJoin = new IndexJoin(FilePath.PathTable1,FilePath.PathTable2,1,1);
         TableDisque T4 = new TableDisque();
-        T4.setFilePath("E:\\4A\\Mechanism_SGBD\\dbms-project\\src\\table1");
+        T4.setFilePath(FilePath.PathTable1);
         TableDisque T5 = new TableDisque();
-        T5.setFilePath("E:\\4A\\Mechanism_SGBD\\dbms-project\\src\\table2");
+        T5.setFilePath(FilePath.PathTable2);
         DBI dbi = new DBI(T4,T5,1,1);
         dbi.open();
         Tuple t1 =null;
