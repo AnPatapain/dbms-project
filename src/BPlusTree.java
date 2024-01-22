@@ -1,7 +1,7 @@
 import java.util.*;
 
 
-class BPlusTree {
+public class BPlusTree {
     int m;
     InternalNode root;
     LeafNode firstLeaf;
@@ -21,7 +21,7 @@ class BPlusTree {
                 return a.compareTo(b);
             }
         };
-        return Arrays.binarySearch(dps, 0, numPairs, new DictionaryPair(t, 0), c);
+        return Arrays.binarySearch(dps, 0, numPairs, new DictionaryPair(t, new ArrayList<>()), c);
     }
 
     // Find the leaf node
@@ -200,16 +200,16 @@ class BPlusTree {
     public void insert(int key, double value) {
         if (isEmpty()) {
 
-            LeafNode ln = new LeafNode(this.m, new DictionaryPair(key, value));
+            LeafNode ln = new LeafNode(this.m, new DictionaryPair(key, new ArrayList<>(Arrays.asList(value)) ));
 
             this.firstLeaf = ln;
 
         } else {
             LeafNode ln = (this.root == null) ? this.firstLeaf : findLeafNode(key);
 
-            if (!ln.insert(new DictionaryPair(key, value))) {
+            if (!ln.insert(new DictionaryPair(key, new ArrayList<>(Arrays.asList(value))))) {
 
-                ln.dictionary[ln.numPairs] = new DictionaryPair(key, value);
+                ln.dictionary[ln.numPairs] = new DictionaryPair(key, new ArrayList<>(Arrays.asList(value)));
                 ln.numPairs++;
                 sortDictionary(ln.dictionary);
 
@@ -258,7 +258,7 @@ class BPlusTree {
         }
     }
 
-    public Double search(int key) {
+    public List<Double> search(int key) {
 
         if (isEmpty()) {
             return null;
@@ -272,7 +272,7 @@ class BPlusTree {
         if (index < 0) {
             return null;
         } else {
-            return dps[index].value;
+            return dps[index].values;
         }
     }
 
@@ -300,7 +300,7 @@ class BPlusTree {
                     else if (tNode instanceof LeafNode) {
                         for(DictionaryPair pair : ((LeafNode) tNode).dictionary) {
                             if(pair != null) {
-                                System.out.print("(" + pair.key + ":" + pair.value + ")");
+                                System.out.print("(" + pair.key + ":" + pair.values + ")");
                             }
                         }
                     }
@@ -386,9 +386,19 @@ class BPlusTree {
             if (this.isFull()) {
                 return false;
             } else {
-                this.dictionary[numPairs] = dp;
-                numPairs++;
-                Arrays.sort(this.dictionary, 0, numPairs);
+                boolean keyExisted = false;
+                for(DictionaryPair dictionaryPair : this.dictionary) {
+                    if(dictionaryPair != null && dictionaryPair.key == dp.key) {
+                        dictionaryPair.values.addAll(dp.values);
+                        keyExisted = true;
+                        break;
+                    }
+                }
+                if(!keyExisted) {
+                    this.dictionary[numPairs] = dp;
+                    numPairs++;
+                    Arrays.sort(this.dictionary, 0, numPairs);
+                }
 
                 return true;
             }
@@ -416,11 +426,10 @@ class BPlusTree {
 
     public class DictionaryPair implements Comparable<DictionaryPair> {
         int key;
-        double value;
-
-        public DictionaryPair(int key, double value) {
+        List<Double> values;
+        public DictionaryPair(int key, List<Double> values) {
             this.key = key;
-            this.value = value;
+            this.values = values;
         }
 
         public int compareTo(DictionaryPair o) {
@@ -439,13 +448,21 @@ class BPlusTree {
         bpt = new BPlusTree(3);
         bpt.insert(5, 33);
         bpt.insert(15, 21);
+        bpt.insert(20, 23);
         bpt.insert(25, 31);
+        bpt.insert(30, 32);
         bpt.insert(35, 41);
+        bpt.insert(40, 47);
         bpt.insert(45, 10);
+        bpt.insert(55, 95);
+        bpt.insert(5, 35);
+        bpt.insert(5, 36);
 
         bpt.display(bpt.root);
+
+
         if (bpt.search(15) != null) {
-            System.out.println("Found");
+            System.out.println("Found: " + bpt.search(5));
         } else {
             System.out.println("Not Found");
         }
