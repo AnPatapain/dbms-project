@@ -5,7 +5,9 @@ public class ExempleIndexCreation {
     public static void main(String[] args) {
         TableDisque T4 = new TableDisque();
 
+
         T4.setFilePath(FilePath.PathTable1);
+
 
 
 //         T4.randomize(4, 6);
@@ -18,10 +20,12 @@ public class ExempleIndexCreation {
         }
 
 
+
         IndexCreation indexCreation = new IndexCreation();
         indexCreation.createHashIndex(FilePath.PathTable1,
                 1);
         indexCreation.displayIndex();
+
 
     }
 }

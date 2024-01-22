@@ -200,7 +200,7 @@ public class BPlusTree {
     public void insert(int key, double value) {
         if (isEmpty()) {
 
-            LeafNode ln = new LeafNode(this.m, new DictionaryPair(key, new ArrayList<>(Arrays.asList(value)) ));
+            LeafNode ln = new LeafNode(this.m, new DictionaryPair(key, new ArrayList<>(Arrays.asList(value))));
 
             this.firstLeaf = ln;
 
@@ -277,8 +277,7 @@ public class BPlusTree {
     }
 
     void display(InternalNode current) {
-        if (current == null)
-            return;
+        if (current == null) return;
 
         Queue<Node> queue = new LinkedList<>();
         queue.add(current);
@@ -288,18 +287,17 @@ public class BPlusTree {
 
             for (int i = 0; i < l; i++) {
                 Node tNode = queue.poll();
-                if(tNode != null) {
-                    if(tNode instanceof InternalNode) {
-                        for(Integer key : ((InternalNode) tNode).keys) {
+                if (tNode != null) {
+                    if (tNode instanceof InternalNode) {
+                        for (Integer key : ((InternalNode) tNode).keys) {
                             System.out.print(key + " ");
                         }
-                        for(Node node : ((InternalNode) tNode).childPointers) {
+                        for (Node node : ((InternalNode) tNode).childPointers) {
                             queue.add(node);
                         }
-                    }
-                    else if (tNode instanceof LeafNode) {
-                        for(DictionaryPair pair : ((LeafNode) tNode).dictionary) {
-                            if(pair != null) {
+                    } else if (tNode instanceof LeafNode) {
+                        for (DictionaryPair pair : ((LeafNode) tNode).dictionary) {
+                            if (pair != null) {
                                 System.out.print("(" + pair.key + ":" + pair.values + ")");
                             }
                         }
@@ -383,13 +381,20 @@ public class BPlusTree {
         }
 
         public boolean insert(DictionaryPair dp) {
-            if (this.isFull()) {
+            boolean keyExisted_ = false;
+            for (int i = 0; i < numPairs; i++) {
+                if (this.dictionary[i].key == dp.key) {
+                    keyExisted_ = true;
+                    break;
+                }
+            }
+            if (this.isFull() && !keyExisted_) {
                 return false;
             } else {
                 boolean keyExisted = false;
-                for(DictionaryPair dictionaryPair : this.dictionary) {
-                    if(dictionaryPair != null && dictionaryPair.key == dp.key) {
-                        dictionaryPair.values.addAll(dp.values);
+                for (int i = 0; i < numPairs; i++) {
+                    if (this.dictionary[i].key == dp.key) {
+                        this.dictionary[i].values.add(dp.values.get(0));
                         keyExisted = true;
                         break;
                     }
@@ -399,12 +404,12 @@ public class BPlusTree {
                     numPairs++;
                     Arrays.sort(this.dictionary, 0, numPairs);
                 }
-
                 return true;
             }
         }
 
         public boolean isFull() {
+
             return numPairs == maxNumPairs;
         }
 
@@ -422,11 +427,21 @@ public class BPlusTree {
             this.numPairs = linearNullSearch(dps);
             this.parent = parent;
         }
+
+        public void displayDictionary() {
+            Arrays.stream(this.dictionary).toList().forEach((dictionaryPair) -> {
+                if(dictionaryPair != null) {
+                    System.out.print(dictionaryPair.key + ": " + dictionaryPair.values);
+                }
+            });
+            System.out.println();
+        }
     }
 
     public class DictionaryPair implements Comparable<DictionaryPair> {
         int key;
         List<Double> values;
+
         public DictionaryPair(int key, List<Double> values) {
             this.key = key;
             this.values = values;
@@ -446,23 +461,28 @@ public class BPlusTree {
     public static void main(String[] args) {
         BPlusTree bpt = null;
         bpt = new BPlusTree(3);
-        bpt.insert(5, 33);
-        bpt.insert(15, 21);
-        bpt.insert(20, 23);
-        bpt.insert(25, 31);
-        bpt.insert(30, 32);
-        bpt.insert(35, 41);
-        bpt.insert(40, 47);
-        bpt.insert(45, 10);
-        bpt.insert(55, 95);
-        bpt.insert(5, 35);
-        bpt.insert(5, 36);
 
+        bpt.insert(4, 2);
+        bpt.display(bpt.root);
+
+        bpt.insert(4, 6);
+        bpt.display(bpt.root);
+
+        bpt.insert(3, 10);
+        bpt.display(bpt.root);
+
+        bpt.insert(3, 14);
+        bpt.display(bpt.root);
+
+        bpt.insert(4, 18);
+        bpt.display(bpt.root);
+
+        bpt.insert(2, 22);
         bpt.display(bpt.root);
 
 
-        if (bpt.search(15) != null) {
-            System.out.println("Found: " + bpt.search(5));
+        if (bpt.search(4) != null) {
+            System.out.println("Found: " + bpt.search(4));
         } else {
             System.out.println("Not Found");
         }
