@@ -96,4 +96,19 @@ public class IndexCreation {
     public List<List<Block>> getListOfBlocks() {
         return listOfBlocks;
     }
+
+    public void displayIndex() {
+        for(int i = 0; i < listOfBlocks.size(); i++) {
+            System.out.print(i + " -> ");
+            List<Block> blocks = listOfBlocks.get(i);
+            for(int j = 0; j < blocks.size(); j++) {
+                System.out.print("[");
+                for(Tuple tuple : blocks.get(j).tuples) {
+                    System.out.print("( " + tuple + ")");
+                }
+                System.out.print("]\t");
+            }
+            System.out.println();
+        }
+    }
 }
