@@ -24,9 +24,9 @@ public class IndexJoin implements Operateur{
         this.filePathTable2 = filePathTable2;
     }
     public void open(){
-        IndexCreation indexOp1 = new IndexCreation();
-        indexOp1.createIndex(filePathTable1,col1);
-        this.indexSetOp1 = indexOp1.getHashIndex().keySet().iterator();
+//        IndexCreation indexOp1 = new IndexCreation();
+//        indexOp1.createIndex(filePathTable1,col1);
+//        this.indexSetOp1 = indexOp1.getHashIndex().keySet().iterator();
     }
     public Tuple next(){
         while  (true) {
@@ -36,7 +36,7 @@ public class IndexJoin implements Operateur{
             if (nouveauTour) {
                 if(this.indexSetOp1.hasNext())
                     this.cle = this.indexSetOp1.next();
-                this.op1 = new IndexScan(this.filePathTable1, this.col1, this.cle, new IndexCreation());
+//                this.op1 = new IndexScan(this.filePathTable1, this.col1, this.cle, new IndexCreation());
                 this.op1.open();
                 this.nouveauTour = false;
             }
@@ -44,7 +44,7 @@ public class IndexJoin implements Operateur{
                 t1 = op1.next();
 //                System.out.println("tourtourtour "+t1);
                 if (t1 != null) {
-                    this.op2 = new IndexScan(this.filePathTable2, this.col2, this.cle, new IndexCreation());
+//                    this.op2 = new IndexScan(this.filePathTable2, this.col2, this.cle, new IndexCreation());
                     this.op2.open();
                     this.nouveauNestedTour = false;
                 } else {

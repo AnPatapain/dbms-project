@@ -9,14 +9,16 @@ public class ExempleIndexScan {
             System.out.println(t);
         }
         T4.close();
+
         System.out.println("/t/t/t/t/t/t//t/t/tt/t/");
-        String path = "E:\\4A\\Mechanism_SGBD\\dbms-project\\src\\table1";
-        IndexScan indexScan = new IndexScan(path, 1, 4, new IndexCreation());
-        Tuple t1 = null;
-        indexScan.open();
-        while((t1 = indexScan.next()) != null) {
-            System.out.println(t1);
-        }
-        indexScan.close();
+//        String path = "E:\\4A\\Mechanism_SGBD\\dbms-project\\src\\table1";
+//        IndexScan indexScan = new IndexScan(path, 1, 4, new IndexCreation());
+//        Tuple t1 = null;
+//        indexScan.open();
+//        while((t1 = indexScan.next()) != null) {
+//            System.out.println(t1);
+//        }
+//        indexScan.close();
+
     }
 }
