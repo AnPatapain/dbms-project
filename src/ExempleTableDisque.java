@@ -2,17 +2,19 @@ public class ExempleTableDisque {
 
     public static void main(String[] args) {
         TableDisque T4 = new TableDisque();
-        T4.setFilePath("C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\table1"); // Mettez ici le bon chemin vers votre fichier
+        T4.setFilePath("E:\\4A\\Mechanism_SGBD\\dbms-project\\src\\table1");// Mettez ici le bon chemin vers votre fichier
         TableDisque T5 = new TableDisque();
-        T5.setFilePath("C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\table2"); // idem
+        T5.setFilePath("E:\\4A\\Mechanism_SGBD\\dbms-project\\src\\table2"); // idem
         Tuple t = null;
 
 
         T4.open();
         T5.open();
         System.out.println("Table T4 ****");
-        while((t = T4.next())!=null)
+        while((t = T4.next())!=null) {
             System.out.println(t);
+            System.out.println("tour");
+        }
         System.out.println("Table T5 ****");
         while((t = T5.next())!=null)
             System.out.println(t);

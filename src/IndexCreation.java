@@ -48,7 +48,7 @@ public class IndexCreation {
             int header_offset = 2;
             int tableSize = randomAccessFile.read();
             int tupleSize = randomAccessFile.read();
-            System.out.println("tableSize: " + tableSize + " tupleSize: " + tupleSize);
+//            System.out.println("tableSize: " + tableSize + " tupleSize: " + tupleSize);
 
             for (int row = 0; row < tableSize; row++) {
                 randomAccessFile.seek((long) row * tupleSize + header_offset);

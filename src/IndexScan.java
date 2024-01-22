@@ -23,9 +23,11 @@ public class IndexScan implements Operateur{
 
     @Override
     public void open() {
-        this.indexCreation.createHashIndex(this.filePath, this.attribute);
-//        tupleAddresses = new ArrayList<>(this.indexCreation.getHashIndex().get(cle));
-        System.out.println(tupleAddresses);
+
+//        this.indexCreation.createHashIndex(this.filePath, this.attribute);
+////        tupleAddresses = new ArrayList<>(this.indexCreation.getHashIndex().get(cle));
+//        System.out.println(tupleAddresses);
+
         e = 0;
         try {
             randomAccessFile = new RandomAccessFile(filePath, "r");
