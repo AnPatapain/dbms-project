@@ -1,10 +1,12 @@
+import java.io.File;
+
 public class ExempleTableDisque {
 
     public static void main(String[] args) {
         TableDisque T4 = new TableDisque();
-        T4.setFilePath("E:\\4A\\Mechanism_SGBD\\dbms-project\\src\\table1");// Mettez ici le bon chemin vers votre fichier
+        T4.setFilePath(FilePath.PathTable1);// Mettez ici le bon chemin vers votre fichier
         TableDisque T5 = new TableDisque();
-        T5.setFilePath("E:\\4A\\Mechanism_SGBD\\dbms-project\\src\\table2"); // idem
+        T5.setFilePath(FilePath.PathTable2); // idem
         Tuple t = null;
 
 
