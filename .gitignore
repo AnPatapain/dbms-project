@@ -1,5 +1,5 @@
 ### IntelliJ IDEA ###
-/src/FilePath.java
+src/FilePath.java
 
 out/
 !**/src/main/**/out/
