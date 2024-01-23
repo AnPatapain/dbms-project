@@ -11,6 +11,8 @@ public class ExempleIndexBplusScan {
         T4.close();
 
         String path = "C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\table1";
+
+        System.out.println("Search tuples that haves value 0 for attribute 1 on BplusIndex");
         BplusIndexScan indexScan = new BplusIndexScan(path, 1, 0, new IndexBPlus(3));
         Tuple t1 = null;
         indexScan.open();

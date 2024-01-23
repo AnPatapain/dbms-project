@@ -12,7 +12,6 @@ public class IndexBPlus {
             int header_offset = 2;
             int tableSize = randomAccessFile.read();
             int tupleSize = randomAccessFile.read();
-            System.out.println("tableSize: " + tableSize + " tupleSize: " + tupleSize);
 
             for (int row = 0; row < tableSize; row++) {
                 // Position the file pointer at the tuple's position

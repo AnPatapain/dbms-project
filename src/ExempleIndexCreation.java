@@ -1,16 +1,18 @@
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class ExempleIndexCreation {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
         TableDisque T4 = new TableDisque();
 
 
-        T4.setFilePath(FilePath.PathTable1);
+        T4.setFilePath("C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\mytable");
 
 
 
-//         T4.randomize(4, 6);
+        T4.randomize(4, 10);
 
         Tuple t = null;
         T4.open();
@@ -21,11 +23,23 @@ public class ExempleIndexCreation {
 
 
 
-        IndexCreation indexCreation = new IndexCreation();
-        indexCreation.createHashIndex(FilePath.PathTable1,
+        IndexCreationFixed indexCreationFixed = new IndexCreationFixed();
+        indexCreationFixed.createHashIndex("C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\mytable",
                 1);
-        indexCreation.displayIndex();
+        indexCreationFixed.displayIndex();
 
+//        String original = "E";
+//        MessageDigest md = MessageDigest.getInstance("MD5");
+//        md.update(original.getBytes());
+//        byte[] digest = md.digest(); // C'est ici que vous récupérez une valeur de type BYTE qui est le résultat de la fonction de hachage
+//        StringBuffer sb = new StringBuffer();
+//        for (byte b : digest) {
+//            System.out.println(b);
+//            sb.append(String.format("%02x", b & 0xff));
+//        }
+//        System.out.println("original:" + original);
+//        System.out.println("digested(hex):" + sb.toString());
+//        System.out.println("premier élément du digest:"+digest[0]);
 
     }
 }
