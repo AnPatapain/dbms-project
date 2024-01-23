@@ -2,17 +2,14 @@ import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Map;
 
 public class ExempleIndexCreation {
     public static void main(String[] args) throws NoSuchAlgorithmException {
         TableDisque T4 = new TableDisque();
 
 
-        T4.setFilePath(FilePath.PathTable1);
-
-
-
-        T4.randomize(4, 5);
+        T4.setFilePath(FilePath.PathTable2);
 
         Tuple t = null;
         T4.open();
@@ -24,11 +21,16 @@ public class ExempleIndexCreation {
 
         System.out.println("Start indexing");
         IndexCreationFixed indexCreationFixed = new IndexCreationFixed();
-        indexCreationFixed.createHashIndex(FilePath.PathTable1,
+        indexCreationFixed.createHashIndex(FilePath.PathTable2,
                 1);
 
         System.out.println(indexCreationFixed.index);
+
+        System.out.println(indexCreationFixed.getAddresses(0));
         System.out.println(indexCreationFixed.getAddresses(1));
+        System.out.println(indexCreationFixed.getAddresses(2));
+        System.out.println(indexCreationFixed.getAddresses(3));
+        System.out.println(indexCreationFixed.getAddresses(4));
 
 //        String original = "E";
 //        MessageDigest md = MessageDigest.getInstance("MD5");

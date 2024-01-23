@@ -1,7 +1,7 @@
 public class ExempleIndexBPlus {
     public static void main(String[] args) {
         TableDisque T4 = new TableDisque();
-        T4.setFilePath("C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\table1");
+        T4.setFilePath(FilePath.PathTable2);
 
         // T4.randomize(4, 6);
 
@@ -13,8 +13,7 @@ public class ExempleIndexBPlus {
         }
 
         IndexBPlus indexBPlus = new IndexBPlus(3);
-        indexBPlus.createIndexBPlus("C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\table1",
-                1);
+        indexBPlus.createIndexBPlus(FilePath.PathTable2, 1);
 
         System.out.println("---------------BPlus Indexing Tree Visualization---------------");
         indexBPlus.visualizeBPlusTree();
