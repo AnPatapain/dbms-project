@@ -37,7 +37,7 @@ public class BplusIndexJoin implements Operateur {
             }
             if(t1!=null){
                 if(nouveauNestedTour){
-                    this.op2 = new BplusIndexScan(filePathTable2,col2,t1.val[col1],new IndexBPlus(3));
+                    this.op2 = new BplusIndexScan(filePathTable2,col2,t1.val[col1],new IndexBPlusCreation(3));
                     this.op2.open();
                     nouveauNestedTour=false;
                 }

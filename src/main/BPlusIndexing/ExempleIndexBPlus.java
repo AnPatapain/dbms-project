@@ -18,13 +18,13 @@ public class ExempleIndexBPlus {
             System.out.println(t);
         }
 
-        IndexBPlus indexBPlus = new IndexBPlus(3);
-        indexBPlus.createIndexBPlus(FilePath.PathTable2, 1);
+        IndexBPlusCreation indexBPlusCreation = new IndexBPlusCreation(3);
+        indexBPlusCreation.createIndexBPlus(FilePath.PathTable2, 1);
 
         System.out.println("---------------BPlus Indexing Tree Visualization---------------");
-        indexBPlus.visualizeBPlusTree();
+        indexBPlusCreation.visualizeBPlusTree();
 
         System.out.println("---------------Find addresses for tuples that have value 0 for attribute 1");
-        System.out.println(indexBPlus.getbPlusTree().search(0));
+        System.out.println(indexBPlusCreation.getbPlusTree().search(0));
     }
 }

@@ -1,14 +1,13 @@
 package main.BPlusIndexing;
 
 
-import main.BPlusIndexing.BPlusTree;
 import main.Tuple;
 
 import java.io.RandomAccessFile;
 
-public class IndexBPlus {
+public class IndexBPlusCreation {
     BPlusTree bPlusTree;
-    public IndexBPlus(int maxDegree) {
+    public IndexBPlusCreation(int maxDegree) {
         this.bPlusTree = new BPlusTree(maxDegree);
     }
 

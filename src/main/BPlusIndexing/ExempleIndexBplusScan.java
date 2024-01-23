@@ -18,12 +18,12 @@ public class ExempleIndexBplusScan {
 
         String path = FilePath.PathTable2;
 
-        BplusIndexScan indexScan = new BplusIndexScan(path, 1, 4, new IndexBPlus(3));
+        BplusIndexScan indexScan = new BplusIndexScan(path, 1, 4, new IndexBPlusCreation(3));
 
         Tuple t1 = null;
         indexScan.open();
         System.out.println("Visualize the tree");
-        indexScan.indexBPlus.bPlusTree.display(indexScan.indexBPlus.bPlusTree.root);
+        indexScan.indexBPlusCreation.bPlusTree.display(indexScan.indexBPlusCreation.bPlusTree.root);
 
         System.out.println("Search tuples that haves value 4 for attribute 1 on BplusIndex");
         while((t1 = indexScan.next()) != null) {
