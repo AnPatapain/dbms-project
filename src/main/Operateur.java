@@ -1,3 +1,5 @@
+package main;
+
 public interface Operateur {
     public void open();
     public Tuple next();

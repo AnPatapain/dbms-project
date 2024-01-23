@@ -1,12 +1,13 @@
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.List;
+package main.HashIndexing;
 
-public class BplusIndexJoin implements Operateur{
+import main.Operateur;
+import main.Tuple;
+
+public class IndexJoin implements Operateur {
     Operateur op1;
     Operateur op2;
 
-
+    String filePathTable1;
     String filePathTable2;
 
     int col1;
@@ -17,7 +18,7 @@ public class BplusIndexJoin implements Operateur{
     boolean nouveauNestedTour = true;
 
 
-    public BplusIndexJoin(Operateur op1,String filePathTable2, int col1,int col2){
+    public IndexJoin(Operateur op1, String filePathTable2, int col1, int col2){
         this.col1 = col1;
         this.col2 = col2;
         this.op1 = op1;
@@ -36,7 +37,7 @@ public class BplusIndexJoin implements Operateur{
             }
             if(t1!=null){
                 if(nouveauNestedTour){
-                    this.op2 = new BplusIndexScan(filePathTable2,col2,t1.val[col1],new IndexBPlus(3));
+                    this.op2 = new IndexScan(filePathTable2,col2,t1.val[col1],new IndexCreation());
                     this.op2.open();
                     nouveauNestedTour=false;
                 }

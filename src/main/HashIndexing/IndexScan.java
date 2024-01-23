@@ -1,11 +1,15 @@
+package main.HashIndexing;
+
+import main.Operateur;
+import main.Tuple;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
 import java.util.List;
 
-public class IndexScan implements Operateur{
+public class IndexScan implements Operateur {
     String filePath;
-    IndexCreationFixed indexCreation;
+    IndexCreation indexCreation;
     int attribute; // The attribute that will be indexed
     int cle; // The value of index attribute that we want to scan
 
@@ -14,7 +18,7 @@ public class IndexScan implements Operateur{
     int currentBlock;
     int tableSize;
     int tupleSize;
-    public IndexScan(String filePath, int attribute, int cle, IndexCreationFixed indexCreationFixed) {
+    public IndexScan(String filePath, int attribute, int cle, IndexCreation indexCreationFixed) {
         this.filePath = filePath;
         this.attribute = attribute;
         this.cle = cle;

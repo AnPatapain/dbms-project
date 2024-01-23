@@ -1,4 +1,5 @@
-import java.io.File;
+package main;
+
 
 public class ExempleTableDisque {
 

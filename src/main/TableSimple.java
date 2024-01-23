@@ -1,6 +1,8 @@
+package main;
+
 import java.util.Vector;
 
-public class TableSimple implements Operateur{
+public class TableSimple implements Operateur {
 
     private Vector<Tuple> contenu;
     int compteur = 0;

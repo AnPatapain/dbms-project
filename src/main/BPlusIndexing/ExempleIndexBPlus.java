@@ -1,3 +1,9 @@
+package main.BPlusIndexing;
+
+import main.FilePath;
+import main.TableDisque;
+import main.Tuple;
+
 public class ExempleIndexBPlus {
     public static void main(String[] args) {
         TableDisque T4 = new TableDisque();

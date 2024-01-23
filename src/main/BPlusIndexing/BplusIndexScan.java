@@ -1,9 +1,13 @@
-import java.io.FileNotFoundException;
+package main.BPlusIndexing;
+
+import main.Operateur;
+import main.Tuple;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.List;
 
-public class BplusIndexScan implements Operateur{
+public class BplusIndexScan implements Operateur {
 
     String filePath;
     IndexBPlus indexBPlus;

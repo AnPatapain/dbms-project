@@ -1,15 +1,19 @@
+package main.HashIndexing;
+
+import main.Tuple;
+
 import java.io.RandomAccessFile;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 
-public class IndexCreationFixed {
+public class IndexCreation {
     public List<List<Integer>> index;
     public Set<Integer> keys;
     private int indexSize = 16;
 
-    public IndexCreationFixed() {
+    public IndexCreation() {
         this.index = new ArrayList<>(indexSize);
         this.keys = new HashSet<>();
         for (int i = 0; i < indexSize; i++) {

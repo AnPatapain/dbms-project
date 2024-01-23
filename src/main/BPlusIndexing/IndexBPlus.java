@@ -1,3 +1,9 @@
+package main.BPlusIndexing;
+
+
+import main.BPlusIndexing.BPlusTree;
+import main.Tuple;
+
 import java.io.RandomAccessFile;
 
 public class IndexBPlus {
@@ -24,7 +30,7 @@ public class IndexBPlus {
                     t.val[j] = randomAccessFile.read();
                 }
 
-                // Index on key. Insert (key, tuplePosition) into BPlusTree.
+                // Index on key. Insert (key, tuplePosition) into main.BPlusIndexing.BPlusTree.
                 int key = t.val[indexed_attribute_position];
 //                System.out.println(key + "::" + tuplePosition);
                 this.bPlusTree.insert(key, tuplePosition);

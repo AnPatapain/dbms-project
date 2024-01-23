@@ -1,3 +1,7 @@
+package main.HashIndexing;
+
+import main.*;
+
 public class ExempleIndexScan {
     public static void main(String[] args) {
         TableDisque T4 = new TableDisque();
@@ -12,7 +16,7 @@ public class ExempleIndexScan {
         T4.close();
 
         System.out.println("/t/t/t/t/t/t//t/t/tt/t/");
-        IndexScan indexScan = new IndexScan(FilePath.MyTable1, 1, 4, new IndexCreationFixed());
+        IndexScan indexScan = new IndexScan(FilePath.MyTable1, 1, 4, new IndexCreation());
         Tuple t1 = null;
         indexScan.open();
         while((t1 = indexScan.next()) != null) {

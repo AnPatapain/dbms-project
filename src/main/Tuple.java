@@ -1,6 +1,8 @@
+package main;
+
 public class Tuple {
 
-    int[] val;
+    public int[] val;
     int size=0;
 
     public Tuple(int s) {

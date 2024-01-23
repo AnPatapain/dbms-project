@@ -1,3 +1,5 @@
+package main;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -86,7 +88,7 @@ public class TableDisque implements Operateur {
                 else
                     this.cache[this.currentMemoryBlock][i] = null;
             }
-//            System.out.println ("Block read : "+this.currentMemoryBlock);
+//            System.out.println ("main.HashIndexing.Block read : "+this.currentMemoryBlock);
             this.reads++;
         }catch (IOException e) {
             System.err.println("Erreur de lecture.");

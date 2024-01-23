@@ -1,4 +1,8 @@
-import java.io.File;
+package main.BPlusIndexing;
+
+import main.FilePath;
+import main.TableDisque;
+import main.Tuple;
 
 public class ExempleIndexBplusScan {
     public static void main(String[] args) {

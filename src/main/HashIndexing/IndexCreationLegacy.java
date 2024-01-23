@@ -1,8 +1,10 @@
+package main.HashIndexing;
+
+import main.Tuple;
+
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 class Block {
     List<Tuple> tuples;
@@ -29,13 +31,13 @@ class Block {
     }
 }
 
-public class IndexCreation {
+public class IndexCreationLegacy {
     private int numberOfBlocks=2;
     private int blockSize=2;
     List<List<Block>> listOfBlocks;
 
     private int currentBlock;
-    public IndexCreation() {
+    public IndexCreationLegacy() {
 
         this.listOfBlocks = new ArrayList<>();
         for (int i = 0; i < numberOfBlocks; i++) {
@@ -66,27 +68,12 @@ public class IndexCreation {
                 List<Block> blockList = listOfBlocks.get(hashValue);
                 this.currentBlock = blockList.size()-1;
 
-                // Add tuple into block corresponding to key
-//                boolean added = false;
-////                // Try to add the record to an existing block.
-//                for (Block block : blockList) {
-//                    if (block.addRecord(t)) {
-//                        added = true;
-//                        break;
-//                    }
-//                }
                 Block block = blockList.get(currentBlock);
                 if(!block.addRecord(t)){
                     Block newBlock = new Block(blockSize);
                     newBlock.addRecord(t);
                     blockList.add(newBlock);
                 }
-                // If all blocks are full, add a new block to the list.
-//                if (!added) {
-//                    Block newBlock = new Block(blockSize);
-//                    newBlock.addRecord(t);
-//                    blockList.add(newBlock);
-//                }
             }
 
             randomAccessFile.close();

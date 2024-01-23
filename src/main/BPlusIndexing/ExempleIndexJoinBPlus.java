@@ -1,4 +1,12 @@
-public class ExempleIndexJoin {
+package main.BPlusIndexing;
+
+import main.BPlusIndexing.BplusIndexJoin;
+import main.DBI;
+import main.FilePath;
+import main.TableDisque;
+import main.Tuple;
+
+public class ExempleIndexJoinBPlus {
     public static void main(String[] args){
 
         TableDisque T4 = new TableDisque();
@@ -20,21 +28,23 @@ public class ExempleIndexJoin {
             System.out.println(t);
         }
         T5.close();
+
         DBI dbi = new DBI(T4,T5,1,1);
         dbi.open();
         Tuple t1 =null;
-        System.out.println("Join by DBI");
+        System.out.println("Join by main.DBI");
         while((t1= dbi.next())!=null){
             System.out.println(t1);
         }
         dbi.close();
         System.out.println("------------------------------------");
-        System.out.println("Join by Indexing");
-        IndexJoin indexJoin = new IndexJoin(T4,FilePath.MyTable2,1,1);
-        indexJoin.open();
-        while((t1= indexJoin.next())!=null){
+        System.out.println("Join by B+ tree");
+        BplusIndexJoin bplusIndexJoin= new BplusIndexJoin(T4, FilePath.MyTable2,1,1);
+        bplusIndexJoin.open();
+        while((t1= bplusIndexJoin.next())!=null){
             System.out.println(t1);
         }
-        indexJoin.close();
+        bplusIndexJoin.close();
     }
+
 }

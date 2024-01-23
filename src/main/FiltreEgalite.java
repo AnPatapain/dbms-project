@@ -1,10 +1,12 @@
-public class FiltreEgalite implements Operateur{
+package main;
+
+public class FiltreEgalite implements Operateur {
 
     private Operateur in;
     private int col;
     private int val;
 
-    // Operateur qui produit les tuples v�rifiant attribut _col = _val
+    // main.Operateur qui produit les tuples v�rifiant attribut _col = _val
     public FiltreEgalite(Operateur _in, int _col, int _val){
         this.in = _in;
         this.col = _col;
