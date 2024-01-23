@@ -6,7 +6,7 @@ import java.util.*;
 
 public class IndexCreationFixed {
     public List<List<Integer>> index;
-    private Set<Integer> keys;
+    public Set<Integer> keys;
     private int indexSize = 16;
 
     public IndexCreationFixed() {
@@ -54,7 +54,7 @@ public class IndexCreationFixed {
                     this.resizeIndex(hashValue);
                 }
 
-                System.out.println(t + "::" + hashValue);
+//                System.out.println(t + "::" + hashValue);
                 this.index.get(hashValue).add(row * tupleSize + header_offset);
             }
 

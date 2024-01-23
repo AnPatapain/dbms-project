@@ -5,52 +5,68 @@ import java.util.List;
 
 public class IndexScan implements Operateur{
     String filePath;
-    IndexCreation indexCreation;
+    IndexCreationFixed indexCreation;
     int attribute; // The attribute that will be indexed
     int cle; // The value of index attribute that we want to scan
 
     RandomAccessFile randomAccessFile;
-    List<Block> blockList;
+    List<Integer> blockList;
     int currentBlock;
     int listBlockSize;
-
-    public IndexScan(String filePath, int attribute, int cle, IndexCreation indexCreation) {
+    int tableSize;
+    int tupleSize;
+    public IndexScan(String filePath, int attribute, int cle, IndexCreationFixed indexCreationFixed) {
         this.filePath = filePath;
         this.attribute = attribute;
         this.cle = cle;
-        this.indexCreation = indexCreation;
+        this.indexCreation = indexCreationFixed;
     }
 
     @Override
     public void open() {
 
         this.indexCreation.createHashIndex(this.filePath, this.attribute);
-//        this.indexCreation.displayIndex();
-        this.blockList = this.indexCreation.getHashIndexList(cle);
-//        System.out.println(blockList);
-        this.currentBlock = 0;
+        this.blockList = this.indexCreation.getAddresses(cle);
+        currentBlock = 0;
+        try {
+            randomAccessFile = new RandomAccessFile(filePath, "r");
+            this.tableSize = randomAccessFile.read();
+            this.tupleSize = randomAccessFile.read();
+        }catch(IOException exception) {
+            throw new RuntimeException(exception);
+        }
+
     }
 
     @Override
     public Tuple next() {
-        this.listBlockSize =this.blockList.size()-1;
-        while(this.currentBlock<this.listBlockSize){
-            Block block = this.blockList.get(this.currentBlock);
-            List<Tuple> listTuples = block.getRecord();
-            while(listTuples.size()>0){
-                Tuple t1 = listTuples.remove(0);
-                if(t1.val[attribute] == cle) {
-//                    System.out.println("Block Read"+(currentBlock);
-                    return t1;
-                }
+        if(blockList==null){
+            return null;
+        }else{
+            if(currentBlock >= blockList.size()){
+                return null;
             }
-            this.currentBlock++;
+            int tupleAddress = blockList.get(currentBlock);
+            Tuple tuple = new Tuple(this.tupleSize);
+            try {
+                randomAccessFile.seek(tupleAddress);
+                for(int col = 0; col < this.tupleSize; col++) {
+                    tuple.val[col] = randomAccessFile.read();
+                }
+            } catch (IOException exception) {
+                throw new RuntimeException(exception);
+            }
+            currentBlock++;
+            return tuple;
         }
-        return null;
     }
 
     @Override
     public void close() {
-
+        try {
+            randomAccessFile.close();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 }

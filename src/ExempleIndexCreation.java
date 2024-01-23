@@ -23,7 +23,7 @@ public class ExempleIndexCreation {
         IndexCreationFixed indexCreationFixed = new IndexCreationFixed();
         indexCreationFixed.createHashIndex(FilePath.PathTable2,
                 1);
-
+        System.out.println(indexCreationFixed.keys);
         System.out.println(indexCreationFixed.index);
 
         System.out.println(indexCreationFixed.getAddresses(0));
