@@ -24,7 +24,7 @@ public class IndexCreationFixed {
         }
     }
 
-    private int getPositionByHashing(int key) throws NoSuchAlgorithmException, NoSuchAlgorithmException {
+    private int getPositionByHashing(int key) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(Integer.toString(key).getBytes());
         byte[] digest = md.digest();
@@ -75,14 +75,6 @@ public class IndexCreationFixed {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public void displayIndex() {
-        System.out.print("[ ");
-        for(int i = 0; i < this.index.size(); i++) {
-            System.out.print(this.index.get(i) + ", ");
-        }
-        System.out.print(" ]");
     }
 
 }

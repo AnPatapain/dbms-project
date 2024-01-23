@@ -459,30 +459,66 @@ public class BPlusTree {
     }
 
     public static void main(String[] args) {
+        /**
+         bpt.insert(3, 2);
+         bpt.insert(1, 6);
+         bpt.insert(0, 10);
+         bpt.insert(1, 14);
+         bpt.insert(1, 18);
+         bpt.insert(1, 22);
+         bpt.insert(3, 26);
+         bpt.insert(1, 30);
+         bpt.insert(3, 34);
+         bpt.insert(0, 38);
+         bpt.insert(1, 42);
+         bpt.insert(4, 46);
+         bpt.insert(4, 50);
+         bpt.insert(3, 54);
+         bpt.insert(4, 58);
+         bpt.insert(2, 62);
+         bpt.insert(3, 66);
+         bpt.insert(1, 70);
+         bpt.insert(2, 74);
+         bpt.insert(0, 78);
+         bpt.insert(1, 82);
+         bpt.insert(2, 86);
+         bpt.insert(4, 90);
+         bpt.insert(3, 94);
+         bpt.insert(2, 98);
+         */
         BPlusTree bpt = null;
         bpt = new BPlusTree(3);
 
-        bpt.insert(4, 2);
+        bpt.insert(3, 2);
+        bpt.insert(1, 6);
+        bpt.insert(0, 10);
+        bpt.insert(1, 14);
+        bpt.insert(1, 18);
+        bpt.insert(1, 22);
+        bpt.insert(3, 26);
+        bpt.insert(1, 30);
+        bpt.insert(3, 34);
+        bpt.insert(0, 38);
+        bpt.insert(1, 42);
+        bpt.insert(4, 46);
+        bpt.insert(4, 50);
+        bpt.insert(3, 54);
+        bpt.insert(4, 58);
+        bpt.insert(2, 62);
+        bpt.insert(3, 66);
+        bpt.insert(1, 70);
+        bpt.insert(2, 74);
+        bpt.insert(0, 78);
+        bpt.insert(1, 82);
+        bpt.insert(2, 86);
+        bpt.insert(4, 90);
+        bpt.insert(3, 94);
+        bpt.insert(2, 98);
+
         bpt.display(bpt.root);
 
-        bpt.insert(4, 6);
-        bpt.display(bpt.root);
-
-        bpt.insert(3, 10);
-        bpt.display(bpt.root);
-
-        bpt.insert(3, 14);
-        bpt.display(bpt.root);
-
-        bpt.insert(4, 18);
-        bpt.display(bpt.root);
-
-        bpt.insert(2, 22);
-        bpt.display(bpt.root);
-
-
-        if (bpt.search(4) != null) {
-            System.out.println("Found: " + bpt.search(4));
+        if (bpt.search(3) != null) {
+            System.out.println("Found: " + bpt.search(3));
         } else {
             System.out.println("Not Found");
         }

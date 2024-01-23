@@ -38,7 +38,8 @@ public class BplusIndexScan implements Operateur{
     @Override
     public Tuple next() {
         List<Double> addresses = this.indexBPlus.getbPlusTree().search(cle);
-        if(this.cursor >= addresses.size()) {
+
+        if(addresses == null || this.cursor >= addresses.size()) {
             return null;
         }
         int tupleAddress = addresses.get(this.cursor).intValue();

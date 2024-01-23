@@ -26,6 +26,7 @@ public class IndexBPlus {
 
                 // Index on key. Insert (key, tuplePosition) into BPlusTree.
                 int key = t.val[indexed_attribute_position];
+//                System.out.println(key + "::" + tuplePosition);
                 this.bPlusTree.insert(key, tuplePosition);
             }
 
