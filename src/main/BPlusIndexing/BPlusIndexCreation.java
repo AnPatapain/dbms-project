@@ -5,9 +5,9 @@ import main.Tuple;
 
 import java.io.RandomAccessFile;
 
-public class IndexBPlusCreation {
+public class BPlusIndexCreation {
     BPlusTree bPlusTree;
-    public IndexBPlusCreation(int maxDegree) {
+    public BPlusIndexCreation(int maxDegree) {
         this.bPlusTree = new BPlusTree(maxDegree);
     }
 

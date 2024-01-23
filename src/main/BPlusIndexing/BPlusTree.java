@@ -490,8 +490,11 @@ public class BPlusTree {
         bpt.insert(3, 94);
         bpt.insert(2, 98);
 
+        System.out.println("------------- B+ Tree Visualization -------------");
         bpt.display(bpt.root);
 
+        System.out.println();
+        System.out.println("Search key 3 on B+ tree");
         if (bpt.search(3) != null) {
             System.out.println("Found: " + bpt.search(3));
         } else {

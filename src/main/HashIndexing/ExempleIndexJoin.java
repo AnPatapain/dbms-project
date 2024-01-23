@@ -6,20 +6,18 @@ public class ExempleIndexJoin {
     public static void main(String[] args){
 
         TableDisque T4 = new TableDisque();
-        T4.setFilePath(FilePath.MyTable1);
-        T4.randomize(4,4);
+        T4.setFilePath(FilePath.PathTable1);
         T4.open();
         Tuple t=null;
-        System.out.println("table4");
+        System.out.println("table 1");
         while((t = T4.next())!=null) {
             System.out.println(t);
         }
         T4.close();
         TableDisque T5 = new TableDisque();
-        T5.setFilePath(FilePath.MyTable2);
-        T5.randomize(4,4);
+        T5.setFilePath(FilePath.PathTable2);
         T5.open();
-        System.out.println("table5");
+        System.out.println("table 2");
         while((t = T5.next())!=null) {
             System.out.println(t);
         }
@@ -33,8 +31,8 @@ public class ExempleIndexJoin {
         }
         dbi.close();
         System.out.println("------------------------------------");
-        System.out.println("Join by Indexing");
-        IndexJoin indexJoin = new IndexJoin(T4, FilePath.MyTable2,1,1);
+        System.out.println("Join by Hash Indexing");
+        IndexJoin indexJoin = new IndexJoin(T4, FilePath.PathTable2,1,1);
         indexJoin.open();
         while((t1= indexJoin.next())!=null){
             System.out.println(t1);

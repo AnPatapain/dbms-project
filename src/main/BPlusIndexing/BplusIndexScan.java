@@ -10,7 +10,7 @@ import java.util.List;
 public class BplusIndexScan implements Operateur {
 
     String filePath;
-    IndexBPlusCreation indexBPlusCreation;
+    BPlusIndexCreation BPlusIndexCreation;
     int attribute; // The attribute that will be indexed
     int cle; // The value of index attribute that we want to scan
     int cursor;
@@ -19,8 +19,8 @@ public class BplusIndexScan implements Operateur {
     int tupleSize;
     int e; // e is the current pointer on tupleAddresses list (Util for le mode pipeline)
 
-    public BplusIndexScan(String filePath, int attribute, int cle, IndexBPlusCreation indexBPlusCreation) {
-        this.indexBPlusCreation = indexBPlusCreation;
+    public BplusIndexScan(String filePath, int attribute, int cle, BPlusIndexCreation BPlusIndexCreation) {
+        this.BPlusIndexCreation = BPlusIndexCreation;
         this.filePath = filePath;
         this.attribute = attribute;
         this.cle = cle;
@@ -28,7 +28,7 @@ public class BplusIndexScan implements Operateur {
 
     @Override
     public void open() {
-        this.indexBPlusCreation.createIndexBPlus(filePath, attribute);
+        this.BPlusIndexCreation.createIndexBPlus(filePath, attribute);
         this.cursor = 0;
         try {
             this.randomAccessFile = new RandomAccessFile(filePath, "r");
@@ -41,7 +41,7 @@ public class BplusIndexScan implements Operateur {
 
     @Override
     public Tuple next() {
-        List<Double> addresses = this.indexBPlusCreation.getbPlusTree().search(cle);
+        List<Double> addresses = this.BPlusIndexCreation.getbPlusTree().search(cle);
 
         if(addresses == null || this.cursor >= addresses.size()) {
             return null;
