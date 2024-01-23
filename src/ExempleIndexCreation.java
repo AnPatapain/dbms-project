@@ -8,7 +8,7 @@ public class ExempleIndexCreation {
         TableDisque T4 = new TableDisque();
 
 
-        T4.setFilePath("C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\mytable");
+        T4.setFilePath(FilePath.PathTable1);
 
 
 
@@ -24,9 +24,11 @@ public class ExempleIndexCreation {
 
 
         IndexCreationFixed indexCreationFixed = new IndexCreationFixed();
-        indexCreationFixed.createHashIndex("C:\\Users\\NGUYEN KE AN\\Documents\\insa\\semester-7\\SGBD\\sgbdProjet\\src\\mytable",
+        indexCreationFixed.createHashIndex(FilePath.PathTable1,
                 1);
-        indexCreationFixed.displayIndex();
+//        indexCreationFixed.displayIndex();
+//        System.out.println(indexCreationFixed.index);
+//        System.out.println(indexCreationFixed.getAddresses(1));
 
 //        String original = "E";
 //        MessageDigest md = MessageDigest.getInstance("MD5");

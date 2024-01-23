@@ -1,18 +1,17 @@
 import java.io.RandomAccessFile;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class IndexCreationFixed {
-    private List<List<Integer>> index;
+    public List<List<Integer>> index;
+    private Set<Integer> keys;
     private int indexSize = 5;
 
     public IndexCreationFixed() {
         this.index = new ArrayList<>(indexSize);
+        this.keys = new HashSet<>();
         for (int i = 0; i < indexSize; i++) {
             this.index.add(new ArrayList<>());
         }
@@ -22,7 +21,7 @@ public class IndexCreationFixed {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(Integer.toString(key).getBytes());
         byte[] digest = md.digest();
-        return (digest[0] & 0xff) % this.index.size();
+        return (digest[0] & 0xff) ;
     }
 
     public void createHashIndex(String filePath, int indexed_attribute_position) {
@@ -42,7 +41,9 @@ public class IndexCreationFixed {
                 // Index on key.
                 int key = t.val[indexed_attribute_position];
                 int hashValue = getPositionByHashing(key);
-                this.index.get(hashValue).add(row * tupleSize + header_offset);
+                System.out.println("::"+key+"::"+hashValue);
+                this.keys.add(key);
+//                this.index.get(hashValue).add(row * tupleSize + header_offset);
             }
 
             randomAccessFile.close();
@@ -53,6 +54,9 @@ public class IndexCreationFixed {
 
     public List<Integer> getAddresses(int key) {
         try {
+            if (!this.keys.contains(key)){
+                return null;
+            }
             int hash = getPositionByHashing(key);
             return this.index.get(hash);
         } catch (NoSuchAlgorithmException e) {
