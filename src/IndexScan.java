@@ -12,7 +12,6 @@ public class IndexScan implements Operateur{
     RandomAccessFile randomAccessFile;
     List<Integer> blockList;
     int currentBlock;
-    int listBlockSize;
     int tableSize;
     int tupleSize;
     public IndexScan(String filePath, int attribute, int cle, IndexCreationFixed indexCreationFixed) {
