@@ -7,12 +7,19 @@ import java.util.*;
 public class IndexCreationFixed {
     public List<List<Integer>> index;
     private Set<Integer> keys;
-    private int indexSize = 5;
+    private int indexSize = 16;
 
     public IndexCreationFixed() {
         this.index = new ArrayList<>(indexSize);
         this.keys = new HashSet<>();
         for (int i = 0; i < indexSize; i++) {
+            this.index.add(new ArrayList<>());
+        }
+    }
+
+    public void resizeIndex(int maxBound) {
+        int numsToResize = maxBound - this.index.size() + 1;
+        for(int i = 0; i < numsToResize; i++) {
             this.index.add(new ArrayList<>());
         }
     }
@@ -41,9 +48,14 @@ public class IndexCreationFixed {
                 // Index on key.
                 int key = t.val[indexed_attribute_position];
                 int hashValue = getPositionByHashing(key);
-                System.out.println("::"+key+"::"+hashValue);
                 this.keys.add(key);
-//                this.index.get(hashValue).add(row * tupleSize + header_offset);
+                // If the hashValue (position on array) is exceeded the size of array
+                if(hashValue >= this.index.size() - 1) {
+                    this.resizeIndex(hashValue);
+                }
+
+                System.out.println(t + "::" + hashValue);
+                this.index.get(hashValue).add(row * tupleSize + header_offset);
             }
 
             randomAccessFile.close();

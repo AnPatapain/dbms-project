@@ -12,7 +12,7 @@ public class ExempleIndexCreation {
 
 
 
-        T4.randomize(4, 10);
+        T4.randomize(4, 5);
 
         Tuple t = null;
         T4.open();
@@ -22,13 +22,13 @@ public class ExempleIndexCreation {
         }
 
 
-
+        System.out.println("Start indexing");
         IndexCreationFixed indexCreationFixed = new IndexCreationFixed();
         indexCreationFixed.createHashIndex(FilePath.PathTable1,
                 1);
-//        indexCreationFixed.displayIndex();
-//        System.out.println(indexCreationFixed.index);
-//        System.out.println(indexCreationFixed.getAddresses(1));
+
+        System.out.println(indexCreationFixed.index);
+        System.out.println(indexCreationFixed.getAddresses(1));
 
 //        String original = "E";
 //        MessageDigest md = MessageDigest.getInstance("MD5");
